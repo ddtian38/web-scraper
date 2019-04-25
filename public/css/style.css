@@ -1,0 +1,15 @@
+
+body{
+     
+    font-family: "Cormorant";
+}
+
+.card {
+
+   }
+
+.card-title a{
+    color: white;
+    text-shadow: 3px 2px black;
+}
+

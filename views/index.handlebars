@@ -1,44 +1,18 @@
-{{!-- <h1>Fake News Times</h1>
-    <div class="row">
-    <div class="col s12 m6">
-      <div class="card medium">
-        <div class="card-image">
-          <img src="https://via.placeholder.com/200">
-          <span class="card-title">Card Title</span>
-        </div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-        </div>
-      </div>
-    </div>
-</div>
-
-    <div class="row">
-    <div class="col s12 m6">
-      <div class="card medium">
-        <div class="card-image">
-          <img src="https://via.placeholder.com/200">
-          <span class="card-title">Card Title</span>
-        </div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-        </div>
-      </div>
-    </div>
-  </div> --}}
-
   {{#each articles}}
-        <div class="row">
-        <div class="col s12 m6">
-        <div class="card medium" data-id="{{this._id}}">
+
+        <div class="card medium z-depth-5" data-id="{{this._id}}">
             <div class="card-image">
-            <img src="{{this.img}}">
-            <span class="card-title">{{this.title}}</span>
+              <img src="{{this.img}}">
+              <span class="card-title"><a href="{{this.link}}">{{this.title}}</a></span>
             </div>
             <div class="card-content">
-            <p>Summary: {{this.summary}}</p>
+                <p>Summary: {{this.summary}}</p>
+            </div>
+            <div class="card-action">
+              <a class="waves-effect waves-light btn-large comment-btn modal-trigger" href="#comment" data-id="{{this._id}}">Comment</a>
             </div>
         </div>
-        </div>
-    </div>
+
   {{/each}}
+
+  {{> modal}}

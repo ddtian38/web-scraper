@@ -8,14 +8,14 @@ mongoose.connect("mongodb://localhost/newsScraper", { useNewUrlParser: true });
 
 
 router.get("/", (req, res)=>{
-    db.Article.find()
-        .then((data)=>{
-            console.log(data)
-            res.render("index", {articles: data})
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+    
+    console.log("retrieving fake news")
+    db.Article.find({}, (err, data)=>{
+        res.render("index", {articles: data})
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
     
 })
 

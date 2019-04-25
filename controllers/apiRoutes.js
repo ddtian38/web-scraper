@@ -27,30 +27,38 @@ router.get("/scrape", (req, res)=>{
 
                 db.Article.create(result)
                 .then((doc)=>{
-                    console.log(doc)
+                    console.log("Adding article to database")
                 })
                 .catch((err)=>{
                     console.log(err)
                 })
 
             })
-        
-            res.send(arr)
+
+            res.send("done")
+           
         })
         .catch((err)=>{
-            res.status(500).json(err)
+            console.log("Cannot find fake news.")
+            res.status(500).send()
         })
 })
 
 router.get("/api/articles", (req, res)=>{
-    db.Article.find()
-        .then((data)=>{
-            console.log(data)
-            res.json(data)
-        })
-        .catch((err)=>{
+    db.Article.find({}, (err,data)=>{
+        res.json(data)
+    })
+    .catch((err)=>{
             console.log(err)
-        })
+    })
+})
+
+router.delete("/api/articles", (req, res) => {
+    console.log("deleting articles")
+    db.Article.deleteMany({}, (err, response)=>{
+        res.send("Database has been cleared")
+    })
+    
 })
 
 
