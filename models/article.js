@@ -18,6 +18,12 @@ let ArticleSchema = new Schema({
         required: true
     },
 
+    img:{
+        type: String,
+        required: true,
+        default: "https://www.humanrights.gov.au/sites/default/files/styles/listing-news-thumbnails/public/news_image_placeholders/n_al_placeholder.jpg?itok=eFwe_ILl"
+    },
+
     comments: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"
