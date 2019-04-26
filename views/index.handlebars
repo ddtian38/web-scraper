@@ -1,18 +1,88 @@
+<style>
+
+.container{
+  margin-top: 25px;
+
+}
+.comments-section {
+  background: lightgray;
+  color: black;
+  margin-top: 10px;
+  padding: 15px;
+  width: 30%;
+  height: 400px;
+  overflow: auto;
+  border: 1px solid #ccc;
+}
+
+.comments{
+  font-size: 12px;
+}
+</style>  
+  
   {{#each articles}}
-
-        <div class="card medium z-depth-5" data-id="{{this._id}}">
-            <div class="card-image">
-              <img src="{{this.img}}">
-              <span class="card-title"><a href="{{this.link}}">{{this.title}}</a></span>
-            </div>
-            <div class="card-content">
-                <p>Summary: {{this.summary}}</p>
-            </div>
-            <div class="card-action">
-              <a class="waves-effect waves-light btn-large comment-btn modal-trigger" href="#comment" data-id="{{this._id}}">Comment</a>
-            </div>
+    <div class="row">
+        <div class="col s7">
+          <div class="card medium z-depth-5" data-id="{{this._id}}">
+              <div class="card-image">
+                <img src="{{this.img}}">
+                <span class="card-title"><a href="{{this.link}}">{{this.title}}</a></span>
+              </div>
+              <div class="card-content">
+                  <p>{{this.summary}}</p>
+              </div>
+              <div class="card-action">
+                <a class="waves-effect waves-light  btn-small comment-btn modal-trigger" href="#comment" data-id="{{this._id}}">Comment</a>
+                <a class="waves-effect waves-light  btn-small view-btn" data-id="{{this._id}}">View Comments</a>
+              </div>
+          </div>
         </div>
-
+        
+        <div class="comments-section col s5" style="display: none;">
+          <div class="card horizontal">
+            <div class="card-image">
+             <img src="https://www.yourbusinessfreedom.com.au/wp-content/uploads/2017/02/unknown-profile-1.jpg">
+           </div>
+           <div class="card-stacked">
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4 username">John Doe</span>
+                <p class="comments">I am a very simple card. I am good at containing small bits of information.</p>
+              </div>
+              <div class="card-action">
+                <a class="waves-effect waves-dark  btn-small remove-btn" data-id="{{this._id}}">Remove Comment</a>
+              </div>
+            </div>
+          </div>
+          <div class="card horizontal">
+            <div class="card-image">
+             <img src="https://www.yourbusinessfreedom.com.au/wp-content/uploads/2017/02/unknown-profile-1.jpg">
+           </div>
+           <div class="card-stacked">
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4 username">John Doe</span>
+                <p class="comments">I am a very simple card. I am good at containing small bits of information.</p>
+              </div>
+              <div class="card-action">
+                <a class="waves-effect waves-dark btn-small remove-btn" data-id="{{this._id}}">Remove Comment</a>
+              </div>
+            </div>
+          </div>
+           <div class="card horizontal">
+            <div class="card-image">
+             <img src="https://www.yourbusinessfreedom.com.au/wp-content/uploads/2017/02/unknown-profile-1.jpg">
+           </div>
+           <div class="card-stacked">
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4 username">John Doe</span>
+                <p class="comments">I am a very simple card. I am good at containing small bits of information.</p>
+              </div>
+              <div class="card-action">
+                <a class="waves-effect waves-dark btn-small remove-btn" data-id="{{this._id}}">Remove Comment</a>
+              </div>
+            </div>
+          </div>        
+        </div>
+    </div>
   {{/each}}
 
   {{> modal}}

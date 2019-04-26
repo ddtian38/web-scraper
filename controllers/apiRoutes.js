@@ -62,13 +62,51 @@ router.delete("/api/articles", (req, res) => {
 })
 
 
-router.post("/comments", (req, res)=>{
+router.post("/api/comments", (req, res)=>{
+    console.log(req.body)
+    let data = {
+        user: req.body.user,
+        content: req.body.comment
+    }
+    db.Comment.create(data, (err, {_id, user, content}) =>{
+       let articleId = req.body.id
+       let commentId = _id;
+       db.Article.updateOne({
+                        _id: articleId
+                    }, 
+                    {
+                        $push: {
+                            comments: commentId
+                            }
+                    }, (err, dbCommentResponse)=>{
+                        console.log(dbCommentResponse)
+                        res.send("enter into database")
+                    })
+    })
     
+
 })
 
 
-router.get("/comments", (req, res)=>{
+router.get("/api/comments", (req, res)=>{
+    db.Comment.find({}, (err, data)=>{
+        res.json(data)
+    })
+})
 
+router.get("/article/:id/comments", (req, res)=>{
+    let articleId = req.params.id;
+    db.Article.find({_id: articleId})
+        .populate("comments")
+        .then((data)=>{
+            res.json({
+                user: data[0].comments[0].user,
+                content: data[0].comments[0].content
+            })
+        })
+        .catch((err)=>{
+            res.send("No comments")
+        })
 })
 
 module.exports = router;
