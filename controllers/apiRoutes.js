@@ -6,8 +6,9 @@ const router = express.Router();
 const db = require("../models");
 const axios = require("axios");
 const cheerio = require("cheerio");
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect("mongodb://localhost/newsScraper", { useNewUrlParser: true });
+mongoose.connect(ONGODB_URI, { useNewUrlParser: true });
 
 router.get("/scrape", (req, res)=>{
     const url = "https://www.infowars.com/"
@@ -112,6 +113,19 @@ router.get("/article/:id/comments", (req, res)=>{
         .catch((err)=>{
             res.send("No comments")
         })
+})
+
+
+router.get("/", (req, res)=>{
+    
+    console.log("retrieving fake news")
+    db.Article.find({}, (err, data)=>{
+        res.render("index", {articles: data})
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+    
 })
 
 module.exports = router;
