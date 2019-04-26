@@ -56,7 +56,12 @@ router.get("/api/articles", (req, res)=>{
 router.delete("/api/articles", (req, res) => {
     console.log("deleting articles")
     db.Article.deleteMany({}, (err, response)=>{
-        res.send("Database has been cleared")
+        console.log("Article database has been cleared.")
+        db.Comment.deleteMany({}, (err, response)=>{
+            console.log("Comment database has been cleared.")
+            res.send("Database has been cleared")
+        })
+        
     })
     
 })
@@ -80,17 +85,20 @@ router.post("/api/comments", (req, res)=>{
                             }
                     }, (err, dbCommentResponse)=>{
                         console.log(dbCommentResponse)
-                        res.send("enter into database")
+                        res.send({_id, user, content})
                     })
     })
-    
-
 })
-
 
 router.get("/api/comments", (req, res)=>{
     db.Comment.find({}, (err, data)=>{
         res.json(data)
+    })
+})
+
+router.delete("/api/comments/:id", (req, res)=>{
+    db.Comment.deleteOne({_id: req.params.id}, (err, data)=>{
+        res.send(data)
     })
 })
 
@@ -99,10 +107,7 @@ router.get("/article/:id/comments", (req, res)=>{
     db.Article.find({_id: articleId})
         .populate("comments")
         .then((data)=>{
-            res.json({
-                user: data[0].comments[0].user,
-                content: data[0].comments[0].content
-            })
+            res.json(data[0].comments)
         })
         .catch((err)=>{
             res.send("No comments")
