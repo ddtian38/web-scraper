@@ -8,7 +8,7 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect(ONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 router.get("/scrape", (req, res)=>{
     const url = "https://www.infowars.com/"

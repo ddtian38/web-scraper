@@ -13,10 +13,8 @@ app.use(express.static("public"));
  app.engine("handlebars", exphbs({defaultLayout: "main"}));
  app.set("view engine", "handlebars");
 
-//  const htmlRoutes = require("./controllers/htmlRoutes.js")
  const apiRoutes = require("./controllers/apiRoutes.js")
 
-app.use(htmlRoutes);
 app.use(apiRoutes);
 
 app.listen(PORT, ()=>{
